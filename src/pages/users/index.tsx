@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { User } from '../../interfaces'
 import { sampleUserData } from '../../utils/sample-data'
-import Layout from '../../components/Layout'
+import Layout from '../../components/Layout/Layout'
 import List from '../../components/List'
 
 type Props = {
@@ -30,7 +30,10 @@ export const getStaticProps: GetStaticProps = async () => {
   // Example for including static props in a Next.js function component page.
   // Don't forget to include the respective types for any props passed into
   // the component.
-  const items: User[] = sampleUserData
+  const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  const items: User[] = await res.json()
+  
+  // const items: User[] = sampleUserData
   return { props: { items } }
 }
 

@@ -8,3 +8,10 @@ export type User = {
   id: number
   name: string
 }
+
+export type Project = {
+  id: number
+  title: string,
+  path: string,
+  tech: string[]
+}
