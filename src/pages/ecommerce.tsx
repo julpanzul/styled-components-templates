@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieCard from '../components/Card/MovieCard/MovieCard'
 import Layout from '../components/Layout/Layout'
-import Swiper from '../components/Slider/Swiper'
+import Swiper from '../components/Swiper'
 import { Row, Col, Button, Container, Hero, Section, SectionContent, SectionHeader, SectionTitle } from '../styles/GlobalComponents'
 import styled from 'styled-components'
 
@@ -12,7 +12,7 @@ const promos = [
 ]
 
 function ecommerce() {
-    const fetchMovies = () => {
+    const fetchProducts = () => {
         const arr = [];
         for (let i = 0; i < 10; i++) {
             arr.push({ id: i, title: "Product " + i, score: "$5", type: "NestFood" });
@@ -21,10 +21,10 @@ function ecommerce() {
     }
   return (
     <Layout title="Movie List">
-      <Section>
+      <Section mt={2}>
           <SectionContent>
             <Swiper>
-              {fetchMovies().map((item, i) => (
+              {fetchProducts().map((item, i) => (
                 <Hero key={i}>
                   {item.title}
                 </Hero>
@@ -32,11 +32,10 @@ function ecommerce() {
             </Swiper>
           </SectionContent>
       </Section>
-      <Section>
+      <Section mb={2}>
           <Container>
             <SectionHeader>
                 <SectionTitle>Promo Product</SectionTitle>
-                <Button onClick={() => console.log('show all')}>Show all</Button>
             </SectionHeader>
             <SectionContent>
                 <Row>
@@ -49,15 +48,14 @@ function ecommerce() {
             </SectionContent>
           </Container>
       </Section>
-      <Section>
+      <Section mb={2}>
         <Container>
           <SectionHeader>
             <SectionTitle>Featured Groceries</SectionTitle>
-            <Button onClick={() => console.log('show all')}>Show all</Button>
           </SectionHeader>
           <SectionContent>
             <Swiper cardToShow={8} minWidth={100}>
-              {fetchMovies().map((item, i) => (
+              {fetchProducts().map((item, i) => (
                 <MiniCard key={i}>
                     <h3>{item.title}</h3>
                 </MiniCard>
@@ -66,7 +64,7 @@ function ecommerce() {
           </SectionContent>
           </Container>
       </Section>
-      <Section>
+      <Section mb={1}>
         <Container>
           <SectionHeader>
             <SectionTitle>Popular Products</SectionTitle>
@@ -74,7 +72,7 @@ function ecommerce() {
           </SectionHeader>
           <SectionContent>
             <Swiper cardToShow={5} minWidth={160}>
-              {fetchMovies().map((item, i) => (
+              {fetchProducts().map((item, i) => (
                 <MovieCard key={i} movie={item}/>
               ))}
             </Swiper>

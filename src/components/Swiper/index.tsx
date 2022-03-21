@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react"
 import {
     SliderItem,
-  ListWrapper,
-  SliderWrapper,
-  SliderContainer,
-  SliderControl,
-  SliderNav,
+    ListWrapper,
+    SliderWrapper,
+    SliderContainer,
+    SliderControl,
+    SliderNav,
 } from "./SliderStyles";
 
 const calcTotalWidth = (length:number, show:number) => {
@@ -17,13 +17,34 @@ function Swiper({children, cardToShow = 1, minWidth = 0}) {
     const [translate, setTranslate] = useState(0)
     const [showNav, setShowNav] = useState(false)
     const sliderRef = useRef(null);
+    const [isActive, setIsActive] = useState(false)
 
     const totalWidth:number = calcTotalWidth(children.length, showCard)
-    const slidePrev = () => (setTranslate(translate + translateVal()))
-    const slideNext = () => (setTranslate(translate - translateVal()))
+    const slidePrev = (e) => {
+        e.preventDefault()
+        setTranslate(translate + translateVal())
+    }
+    
+    const slideNext = (e) => {
+        e.preventDefault()
+        setTranslate(translate - translateVal())
+    }
+
     const translateVal = () => (100 / showCard)
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const getSliderWidth: number = sliderRef.current.offsetWidth
+            const cardsFit: number = Math.floor(getSliderWidth / minWidth)
+            setShowCard(cardsFit < cardToShow? cardsFit : cardToShow);
+            setTranslate(0)
+        }
+    }, [])
+
     useEffect(() => {
         if(cardToShow > 1 && minWidth > 0) {
+            setIsActive(true)
+
             if (typeof window !== "undefined") {
                 let timeoutId = null;
                 
@@ -34,28 +55,38 @@ function Swiper({children, cardToShow = 1, minWidth = 0}) {
                     const cardsFit: number = Math.floor(getSliderWidth / minWidth)
                     setShowCard(cardsFit < cardToShow? cardsFit : cardToShow);
                     setTranslate(0)
-                    console.log(cardsFit)
                   }, 500)
                 }
                 window.addEventListener("resize", resizeListener);
                 return () => window.removeEventListener("resize", resizeListener);
             }
         }
-    }, []);
+    });
 
-    function handleTranslate(e) {
-        console.log(Math.floor(e.pageX / 160))
+    const sliderStyle = (active:boolean) => {
+        if(active || cardToShow === 1) {
+            return {
+                transform: `translateX(${translate}%)`,
+                flexWrap: 'nowrap',
+                gap: 'unset'
+            }
+        }
+
+        return {
+            flexWrap: 'wrap',
+            gap: '1rem',
+            justifyContent: 'center'
+        }
     }
 
   return (
     <SliderContainer
         onMouseEnter={() => setShowNav(true)}
         onMouseLeave={() => setShowNav(false)}>
-        <SliderWrapper 
-            onClick={handleTranslate}>
-            <ListWrapper ref={sliderRef} style={{transform: `translateX(${translate}%)`}}>
+        <SliderWrapper >
+            <ListWrapper ref={sliderRef} style={sliderStyle(isActive)}>
                 {React.Children.map(children, child => (
-                    <SliderItem style={{ flex: `1 0 ${100 / showCard}%`}}>
+                    <SliderItem style={{ flex: `${isActive? 1 : 0} 0 ${100 / showCard}%`}}>
                         {React.cloneElement(child, {style: {margin:'0 auto'}})}
                     </SliderItem>
                 ))}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Nav = styled.nav`
-  height: ${(props) => (props.height ? `${props.height}px` : "")};
+  height: ${(props) => props.height};
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -28,6 +28,12 @@ export const NavItem = styled.li`
   list-style: none;
   &>a {
     text-decoration: none;
-    padding: 0.5em 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0.3em 0;
+    border-bottom: 4px solid transparent;
+    &:hover {
+      border-bottom: 4px solid slateblue;
+    }
   }
 `;

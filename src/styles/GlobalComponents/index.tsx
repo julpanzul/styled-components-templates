@@ -1,17 +1,35 @@
 import styled from "styled-components";
 
+const handleMargin = margin => (margin? `${margin}em` : '')
+
+const handleSize = size => {
+  switch (size) {
+    case "xs":
+      return ".5rem";
+    case "sm":
+      return ".8rem";
+    case "md":
+      return "1.2rem";
+    case "lg":
+      return "1.5rem";
+    default:
+      return "1rem";
+  }
+};
+
 export const Container = styled.div`
   max-width: 1140px;
   width: 100%;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
+  text-align: ${(props) => props.textAlign};
 `;
 
 export const Section = styled.section`
   background-color: ${(props) => props.darkMode? 'salmon': ''};
-  margin-top: 2em;
-  margin-bottom: 2em;
+  margin-top: ${(props) => handleMargin(props.mt)};
+  margin-bottom: ${(props) => handleMargin(props.mb)};
 `;
 
 export const SectionTitle = styled.div`
@@ -48,11 +66,12 @@ export const Input = styled.input`
   `;
 
 export const Button = styled.button`
+  background-color: ${(props) => props.bg === 'none'? 'transparent' : props.bg};
   white-space: ${(props) => props.nowrap? 'nowrap' : ''};
   padding: 0.5em 0.8em;
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  font-size: 0.9rem;
+  border: ${(props) => props.border && props.border !== 'none'? `${props.border}px solid rgba(0, 0, 0, 0.5)` : 'none'};
+  font-size: ${(props) => handleSize(props.size)};
   cursor: pointer;
 `;
 
@@ -110,3 +129,17 @@ export const Hero = styled.div`
   border: 1px solid ${(props) => props.theme.colors.primary1};
   margin: 0 auto;
 `
+
+export const Heading = styled.h3`
+  font-size: ${(props) => props.fontSize? `${props.fontSize}rem`:''};
+  color: ${(props) => props.color};
+  margin-top: ${(props) => handleMargin(props.mt)};
+  margin-bottom: ${(props) => handleMargin(props.mb)};
+` 
+
+export const Text = styled.p`
+  font-size: ${(props) => props.fontSize? `${props.fontSize}rem`:''};
+  color: ${(props) => props.color};
+  margin-top: ${(props) => handleMargin(props.mt)};
+  margin-bottom: ${(props) => handleMargin(props.mb)};
+` 

@@ -1,10 +1,11 @@
+import Link from 'next/link'
 import React from 'react'
-import Banner from '../components/Banner/Banner'
-import MovieCard from '../components/Card/MovieCard/MovieCard'
-import Layout from '../components/Layout/Layout'
-import Swiper from '../components/Slider/Swiper'
-import { banner_list } from '../constant/banner_list'
-import { Button, Container, Section, SectionContent, SectionHeader, SectionTitle } from '../styles/GlobalComponents'
+import Banner from '../../components/Banner/Banner'
+import MovieCard from '../../components/Card/MovieCard/MovieCard'
+import Layout from '../../components/Layout/Layout'
+import Swiper from '../../components/Swiper'
+import { banner_list } from '../../constant/banner_list'
+import { Button, Container, Section, SectionContent, SectionHeader, SectionTitle, Heading, Text } from '../../styles/GlobalComponents'
 
 function movies() {
     const fetchMovies = () => {
@@ -16,7 +17,7 @@ function movies() {
     }
   return (
     <Layout title="Movie List">
-      <Section>
+      <Section mt={3}>
         <Container>
           <SectionContent>
             <Swiper>
@@ -27,11 +28,17 @@ function movies() {
           </SectionContent>
         </Container>
       </Section>
-      <Section>
+      <Section mt={1}>
         <Container>
           <SectionHeader>
-            <SectionTitle>Movies</SectionTitle>
-            <Button onClick={() => console.log('show all')}>Show all</Button>
+            <SectionTitle>
+              <Heading fontSize={'1.5'}>
+                Popular Movies
+              </Heading>
+            </SectionTitle>
+            <Link href="/">
+              <Button size={'sm'} border={1}>Show all</Button>
+            </Link>
           </SectionHeader>
           <SectionContent>
             <Swiper cardToShow={6} minWidth={160}>
@@ -42,7 +49,6 @@ function movies() {
           </SectionContent>
           </Container>
       </Section>
-      <Section></Section>
     </Layout>
   )
 }

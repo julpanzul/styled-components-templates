@@ -16,7 +16,6 @@ export const SliderContainer = styled.div`
 
 export const SliderWrapper = styled.div`
   overflow-x: scroll;
-  cursor: grab;
 
   @media ${(props) => props.theme.breakpoints.sm} {
     overflow: hidden;
@@ -62,6 +61,7 @@ const SliderNavButton = styled.a`
   justify-content: center;
   align-items: center;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2);
+  user-select: none;
   cursor: pointer;
 `;
 

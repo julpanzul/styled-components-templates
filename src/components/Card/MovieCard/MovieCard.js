@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   Card,
@@ -9,7 +9,8 @@ import {
 } from "./MovieCardStyles";
 
 function MovieCard({ movie }) {
-  const [onHover, setOnHover] = useState(false);
+  const [onHover, setOnHover] = useState(true);
+  useEffect(() => setOnHover(false), []);
   return (
     <Card
       onMouseEnter={() => setOnHover(true)}

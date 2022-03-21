@@ -15,7 +15,7 @@ const properties = () => {
 function realestate() {
   return (
     <Layout title="Home | Next.js + TypeScript Example">
-      <Section>
+      <Section mt={2}>
         <Container>
           <SectionHeader>
             <SectionTitle>Projects</SectionTitle>

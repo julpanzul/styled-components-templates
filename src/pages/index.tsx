@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import { useState } from 'react'
-import styled from 'styled-components'
 import BlogCard from '../components/Card/BlogCard/BlogCard'
 import MovieCard from '../components/Card/MovieCard/MovieCard'
 import Layout from '../components/Layout/Layout'
-import Swiper from '../components/Slider/Swiper'
-import { Hero, Row, Col, Flex, Container, Section, SectionContent, SectionHeader, SectionTitle, Button, Input, Select } from '../styles/GlobalComponents'
+import Swiper from '../components/Swiper'
+import { Hero, Flex, Container, Section, SectionContent, SectionHeader, SectionTitle, Button, } from '../styles/GlobalComponents'
 import { projects } from '../utils/sample-data'
 
 const IndexPage = () => {
@@ -19,8 +18,8 @@ const IndexPage = () => {
     return arr;
   };
   return(
-    <Layout title="Home | Next.js + TypeScript Example">
-      <Section>
+    <Layout title="Home | Next Project Template">
+      <Section mt={2}>
           <SectionContent>
             <Swiper>
               {fetchMovies().map((item, i) => (
@@ -32,11 +31,11 @@ const IndexPage = () => {
           </SectionContent>
       </Section>
       
-      <Section>
+      <Section mb={2}>
         <Container>
           <SectionHeader>
             <SectionTitle>Projects</SectionTitle>
-            <Button onClick={() => setDir(!dir)}>Show all</Button>
+            <Button onClick={() => setDir(!dir)} border={1}>Show all</Button>
           </SectionHeader>
           <SectionContent>
             <Flex>
@@ -54,7 +53,7 @@ const IndexPage = () => {
           </Container>
       </Section>
       
-      <Section>
+      <Section mb={2}>
         <Container>
           <SectionHeader>
             <SectionTitle>Movies</SectionTitle>
@@ -68,26 +67,6 @@ const IndexPage = () => {
             </Swiper>
           </SectionContent>
           </Container>
-      </Section>
-      <Section>
-        <Row>
-          <Col sm={4} xs={0} bg={'salmon'}>
-            <Hero style={{maxWidth: '300px'}}>Lorem ipsum dolor sit amet.</Hero>
-          </Col>
-          <Col sm={8} xs={12} bg={'darkcyan'}>
-            <Flex fullwidth nowrap>
-
-            <Input />
-            <Button nowrap>Hello semua!</Button>
-            <Select>
-              <option value="1">Opsi 1</option>
-              <option value="2">Opsi 2</option>
-              <option value="3">Opsi 3</option>
-              <option value="4">Opsi 4</option>
-            </Select>
-            </Flex>
-          </Col>
-        </Row>
       </Section>
   </Layout>
   )

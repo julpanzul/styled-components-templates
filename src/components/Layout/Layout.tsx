@@ -22,7 +22,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     </header>
     <main>{children}</main>
     <footer>
-      <Container>
+      <Container textAlign={'center'}>
         <p>Copyright 2022</p>
       </Container>
     </footer>
